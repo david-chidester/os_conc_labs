@@ -1,33 +1,3 @@
- /***********************************************************************
- * Name(s)  (David Chidester)                                          *
- * Box(s): D155                                                        *
- * Assignment name (Lab 1: Song Program Project)                       *
- *      (25% off if name/number does not match assignment)             *
- * Assignment for: Operating Systems and Concurency                    *
- ***********************************************************************/
-
-/* *********************************************************************
- * Academic honesty certification:                                     *
- *   Written/online sources used: None                                 *
- *     [include textbook(s), CS 451 labs or readings;                  *
- *       complete citations for Web or other written sources           *
- *      write "none" if no sources used] The Legend of Zelda Ocarina   *
- *      of Time, Developed and published by Nintendo in 1998 composed  *
- *      by Koji Kondo.                                                 *
- *      The Legend of Zelda Skyward Sword Developed and published by   *
- *      Nintendo in 2011 composed by Koji Kondo.                       *
- *   Help obtained None                                                *
- *     [indicate names of instructor, class mentors                    *
- *      or evening tutors, consulted according to class policy;        *
- *      write "none" if none of these sources used] None               *
- *     ["none" or the instructor's name for Supplemental Problems      *
- *   My/our signature(s) below confirms that the above list of sources *
- *   is complete AND that I/we have not talked to anyone else          *
- *   (e.g., CSC 161 students) about the solution to this problem       *
- *                                                                     *
- *   Signature:                                                        *
- ***********************************************************************/
-
 /*
 This program is the first several notes of several songs from
 The Legend of Zelda Ocarina of Time. Composer: Koji Kondo. 
