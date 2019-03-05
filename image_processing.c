@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include "MyroC.h"
 
@@ -9,6 +8,7 @@ void pictureRedder (Picture * pic);
 void pictureGreener (Picture * pic);
 void pictureBluer (Picture * pic);
 void circleSelect (Picture * pic, int xCenter, int yCenter, int radius);
+void zebra (Picture * pic);
 
 
 
@@ -26,7 +26,11 @@ int main()
 
   pictureGreener (&pic1);
 
-  rDisplayPicture (&pic1, 3.0, "Greenered Image");
+ rDisplayPicture (&pic1, 3.0, "Greenered Image");
+    
+  zebra (&pic1);
+  
+  rDisplayPicture (&pic1, 3.0, "Zebra image");
 }
 
 Picture create_black_image (int height, int width)
@@ -135,3 +139,32 @@ void pictureBluer (Picture * pic)
 
 }
 
+void zebra (Picture * pic){ //Makes a picture of zebra stripes
+    printf("This is the Zebra Stripe function\n");
+    int row, col;
+    
+    for (row = 0; row < (*pic).height; row++)
+    {
+        for (col = 0; col < (*pic).width; col++)
+        {
+            ((*pic).pix_array[row][col]).R = 255;
+            ((*pic).pix_array[row][col]).G = 255;
+            ((*pic).pix_array[row][col]).B = 255;
+        }
+    }
+    
+    for (row = 0; row < (*pic).height; row += 4)
+    {
+        for (col = 0; col < (*pic).width; col++)
+        {
+            ((*pic).pix_array[row][col]).R = 0;
+            ((*pic).pix_array[row + 1][col + 1]).R = 0;
+            
+            ((*pic).pix_array[row][col]).G = 0;
+            ((*pic).pix_array[row + 1][col + 1]).G = 0;
+            
+            ((*pic).pix_array[row][col]).B = 0;
+            ((*pic).pix_array[row + 1][col + 1]).B = 0;
+        }
+    }
+}
