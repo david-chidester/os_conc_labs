@@ -20,16 +20,17 @@
 #include "MyroC.h"
 #include <math.h>
 
+//function prototypes
+
 Picture create_black_image (int height, int width);
 void create_test_image (Picture * pic);
-void pixelStrip (Picture * pic, char color);
 void pictureRedder (Picture * pic);
 void pictureGreener (Picture * pic);
 void pictureBluer (Picture * pic);
 void circleSelect (Picture * pic, int xCenter, int yCenter, int radius);
 void zebra (Picture * pic);
 void strip (Picture * pic, char color);
-void circleSelect (Picture * pic, int xCenter, int yCenter, int radius);
+void circleSelect (Picture * pic, int xCenter, int yCenter, int radius); //creates a grayscale circle
 
 
 
@@ -182,7 +183,7 @@ void zebra (Picture * pic){ //Makes a picture of zebra stripes on black parts of
     
     for (row = 0; row < (*pic).height; row += 4) //draws black striped on white pixels
     {
-        for (col = 0; col < (*pic).width; col++)
+        for (col = 0; col < (*pic).width; col++) //iteration through columns will create horizontal stripes
         {
             if (((*pic).pix_array[row][col]).R == 255 && ((*pic).pix_array[row][col]).G == 255 && ((*pic).pix_array[row][col]).B == 255){
                 ((*pic).pix_array[row][col]).R = 0;
