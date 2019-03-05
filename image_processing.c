@@ -1,3 +1,21 @@
+/***********************************************************************
+ * Name(s)  David Chidester and Christian Sidwell                      *
+ * Box(s):           D155                 A211                         *
+ * Assignment name  Image Processing                                   *
+ * Assignment for 3/5/19                                               *
+ ***********************************************************************/
+
+/* *********************************************************************
+ * Academic honesty certification:                                     *
+ *   Written/online sources used: None                                 *
+ *                                                                     *
+ *   Help obtained                                                     *
+ *     Devin Otto                                                      *
+ *         Gave advice on writing circle function                      *
+ *                                                                     *
+ *Signature:                                                           *
+ ***********************************************************************/
+
 #include <stdio.h>
 #include "MyroC.h"
 #include <math.h>
@@ -20,7 +38,7 @@ int main()
   Picture pic1 = create_black_image(200,300);
   create_test_image(&pic1);
 
-  rDisplayPicture (&pic1, 3.0, "Striped Image");
+  rDisplayPicture (&pic1, 3.0, "Striped Image"); //creatse RGB striped on a red background
     
   strip (&pic1, 'B');
     
@@ -41,7 +59,7 @@ int main()
   int xCenter = pic1.width/2;
   int yCenter = pic1.height/2;
     
-  circleSelect (&pic1, xCenter, yCenter, 25);
+  circleSelect (&pic1, xCenter, yCenter, 25); //creatse a greyscaled circle in the center of the image
     
   rDisplayPicture (&pic1, 3.0, "Circle");
 }
@@ -88,13 +106,7 @@ void create_test_image(Picture * pic)
       }
 }
 
-/*Grayscale values for an image are ( (0.3*R) (0.59*G) (0.11*B)*/
-void pixelStrip(Picture * pic, char color)
-{
-
-}
-
-void pictureRedder (Picture * pic)
+void pictureRedder (Picture * pic) //increases red value
 {
   printf("This is the REDDER function\n");
   int row, col;
@@ -121,7 +133,7 @@ void pictureRedder (Picture * pic)
      }
 }
 
-void pictureGreener (Picture * pic)
+void pictureGreener (Picture * pic) //increases green value
 {
   printf("This is the REDDER function\n");
   int row, col;
@@ -147,7 +159,7 @@ void pictureGreener (Picture * pic)
          }
      }
 }
-void pictureBluer (Picture * pic)
+void pictureBluer (Picture * pic) //increases blue value
 {
 
 }
@@ -156,7 +168,7 @@ void zebra (Picture * pic){ //Makes a picture of zebra stripes on black parts of
     printf("This is the Zebra Stripe function\n");
     int row, col;
     
-    for (row = 0; row < (*pic).height; row++)
+    for (row = 0; row < (*pic).height; row++) //makes black pixels white
     {
         for (col = 0; col < (*pic).width; col++)
         {
@@ -168,7 +180,7 @@ void zebra (Picture * pic){ //Makes a picture of zebra stripes on black parts of
         }
     }
     
-    for (row = 0; row < (*pic).height; row += 4)
+    for (row = 0; row < (*pic).height; row += 4) //draws black striped on white pixels
     {
         for (col = 0; col < (*pic).width; col++)
         {
@@ -214,7 +226,7 @@ void strip (Picture * pic, char color){
 }
 
 /*Grayscale values for an image are ( (0.3*R) (0.59*G) (0.11*B)*/
-void circleSelect (Picture * pic, int xCenter, int yCenter, int radius)
+void circleSelect (Picture * pic, int xCenter, int yCenter, int radius) //Makes a grayscale circle at coordinates with the radius
 {
     printf ("This is the circle function\n");
     printf ("This is the height of the pic %d\n", (*pic).height);
