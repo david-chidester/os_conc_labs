@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include "MyroC.h"
 
@@ -10,6 +9,7 @@ void pictureGreener (Picture * pic);
 void pictureBluer (Picture * pic);
 void circleSelect (Picture * pic, int xCenter, int yCenter, int radius);
 void zebra (Picture * pic);
+void strip (Picture * pic, char color);
 
 
 
@@ -19,23 +19,22 @@ int main()
   create_test_image(&pic1);
 
   rDisplayPicture (&pic1, 3.0, "Striped Image");
-
+    
+  strip (&pic1, 'B');
+    
+  rDisplayPicture (&pic1, 3.0, "blue removed from image"); //removes all blue from an image
 
   pictureRedder (&pic1);
 
-  rDisplayPicture (&pic1, 3.0, "Reddered Image");
+  rDisplayPicture (&pic1, 3.0, "Reddered Image"); //enhances red in image
 
   pictureGreener (&pic1);
 
-  rDisplayPicture (&pic1, 3.0, "Greenered Image");
-
-  pictureBluer (&pic1);
-  
-  rDisplayPicture (&pic1, 3.0, "Bluered Image");
-
+  rDisplayPicture (&pic1, 3.0, "Greenered Image"); //enhances green in image
+    
   zebra (&pic1);
   
-  rDisplayPicture (&pic1, 3.0, "Zebra Image");
+  rDisplayPicture (&pic1, 3.0, "Zebra image"); //makes all pure black and pure white parts of the image zebra striped
 }
 
 Picture create_black_image (int height, int width)
@@ -86,11 +85,6 @@ void pixelStrip(Picture * pic, char color)
 
 }
 
-void circleSelect (Picture * pic, int xCenter, int yCenter, int radius)
-{
-
-}
-
 void pictureRedder (Picture * pic)
 {
   printf("This is the REDDER function\n");
@@ -100,128 +94,56 @@ void pictureRedder (Picture * pic)
     {
       for (col = 0; col < (*pic).width; col++)
         {
-          if (((((*pic).pix_array[row][col]).R) > 0) && ((((*pic).pix_array[row][col]).R) <= 90))
+          if (((((*pic).pix_array[row][col]).R) > 0) && ((((*pic).pix_array[row][col]).R) <= 130))
             {
-              Pixel redder = { ((((*pic).pix_array[row][col]).R) += 80), ((*pic).pix_array[row][col]).G, ((*pic).pix_array[row][col]).B};
+              Pixel redder = { ((((*pic).pix_array[row][col]).R) += 100), ((*pic).pix_array[row][col]).G, ((*pic).pix_array[row][col]).B};
               (*pic).pix_array[row][col] = redder;
             }
-          else if (((((*pic).pix_array[row][col]).R) > 90) && ((((*pic).pix_array[row][col]).R) <= 190))
+          else if (((((*pic).pix_array[row][col]).R) >= 130) && ((((*pic).pix_array[row][col]).R) <= 254))
             {
               Pixel redder = { ((((*pic).pix_array[row][col]).R) += 50), ((*pic).pix_array[row][col]).G, ((*pic).pix_array[row][col]).B};
               (*pic).pix_array[row][col] = redder;
             }
-          else if (((((*pic).pix_array[row][col]).R) > 190) && ((((*pic).pix_array[row][col]).R) < 240))
+          else if ((((*pic).pix_array[row][col]).R) >= 255)
             {
-              Pixel redder = { ((((*pic).pix_array[row][col]).R) += 10), ((*pic).pix_array[row][col]).G, ((*pic).pix_array[row][col]).B};
-              (*pic).pix_array[row][col] = redder;
+              
             }
-          else if (((((*pic).pix_array[row][col]).R) >= 240) && ((((*pic).pix_array[row][col]).R) < 252))
-            {
-              Pixel redder = { ((((*pic).pix_array[row][col]).R) += 2), ((*pic).pix_array[row][col]).G, ((*pic).pix_array[row][col]).B};
-              (*pic).pix_array[row][col] = redder;
-            }
-          else if ((((*pic).pix_array[row][col]).R) == 254)
-            {
-              Pixel redder = { ((((*pic).pix_array[row][col]).R) += 1), ((*pic).pix_array[row][col]).G, ((*pic).pix_array[row][col]).B};
-              (*pic).pix_array[row][col] = redder; 
-            }
-          else if ((((*pic).pix_array[row][col]).R) == 255)
-            {
-              Pixel noChange = { ((((*pic).pix_array[row][col]).R)), ((*pic).pix_array[row][col]).G, ((*pic).pix_array[row][col]).B};
-              (*pic).pix_array[row][col] = noChange; 
-            }
-
          }
      }
 }
 
 void pictureGreener (Picture * pic)
 {
-  printf("This is the GREENER function\n");
+  printf("This is the REDDER function\n");
   int row, col;
 
   for (row = 0; row < (*pic).height; row++)
     {
       for (col = 0; col < (*pic).width; col++)
         {
-          if (((((*pic).pix_array[row][col]).G) > 0) && ((((*pic).pix_array[row][col]).G) <= 90))
+          if (((((*pic).pix_array[row][col]).R) > 0) && ((((*pic).pix_array[row][col]).R) <= 130))
             {
-              Pixel greener = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G += 80), ((*pic).pix_array[row][col]).B};
-              (*pic).pix_array[row][col] = greener;
+              Pixel redder = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G += 100), ((*pic).pix_array[row][col]).B};
+              (*pic).pix_array[row][col] = redder;
             }
-          else if (((((*pic).pix_array[row][col]).G) > 90) && ((((*pic).pix_array[row][col]).G) <= 190))
+          else if (((((*pic).pix_array[row][col]).R) >= 130) && ((((*pic).pix_array[row][col]).R) <= 254))
             {
-              Pixel greener = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G += 50), ((*pic).pix_array[row][col]).B};
-              (*pic).pix_array[row][col] = greener;
+              Pixel redder = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G += 50), ((*pic).pix_array[row][col]).B};
+              (*pic).pix_array[row][col] = redder;
             }
-          else if (((((*pic).pix_array[row][col]).G) > 190) && ((((*pic).pix_array[row][col]).G) < 240))
+          else if ((((*pic).pix_array[row][col]).R) >= 255)
             {
-              Pixel greener = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G += 10), ((*pic).pix_array[row][col]).B};
-              (*pic).pix_array[row][col] = greener;
-            }
-          else if (((((*pic).pix_array[row][col]).G) >= 240) && ((((*pic).pix_array[row][col]).G) < 252))
-            {
-              Pixel greener = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G += 2), ((*pic).pix_array[row][col]).B};
-              (*pic).pix_array[row][col] = greener;
-            }
-          else if ((((*pic).pix_array[row][col]).G) == 254)
-            {
-              Pixel greener = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G += 1), ((*pic).pix_array[row][col]).B};
-              (*pic).pix_array[row][col] = greener;
-            }
-          else if ((((*pic).pix_array[row][col]).G) == 255)
-            {
-              Pixel noChange = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G), ((*pic).pix_array[row][col]).B};
-              (*pic).pix_array[row][col] = noChange;
+              
             }
          }
      }
 }
 void pictureBluer (Picture * pic)
 {
-  printf("This is the BLUER function\n");
-  int row, col;
 
-  for (row = 0; row < (*pic).height; row++)
-    {
-      for (col = 0; col < (*pic).width; col++)
-        {
-          if (((((*pic).pix_array[row][col]).B) > 0) && ((((*pic).pix_array[row][col]).B) <= 90))
-            {
-              Pixel bluer = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G), (((*pic).pix_array[row][col]).B += 80)};
-              (*pic).pix_array[row][col] = bluer;
-            }
-          else if (((((*pic).pix_array[row][col]).B) > 90) && ((((*pic).pix_array[row][col]).B) <= 190))
-            {
-              Pixel bluer = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G), (((*pic).pix_array[row][col]).B += 50)};
-              (*pic).pix_array[row][col] = bluer;
-            }
-          else if (((((*pic).pix_array[row][col]).B) > 190) && ((((*pic).pix_array[row][col]).B) < 240))
-            {
-              Pixel bluer = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G), (((*pic).pix_array[row][col]).B += 10)};
-              (*pic).pix_array[row][col] = bluer;
-            }
-          else if (((((*pic).pix_array[row][col]).B) >= 240) && ((((*pic).pix_array[row][col]).B) <= 252))
-            {
-              Pixel bluer = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G), (((*pic).pix_array[row][col]).B += 2)};
-              (*pic).pix_array[row][col] = bluer;
-            }
-          else if ((((*pic).pix_array[row][col]).B) == 254)
-            {
-              Pixel bluer = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G), (((*pic).pix_array[row][col]).B += 1)};
-              (*pic).pix_array[row][col] = bluer;
-            }
-          else if ((((*pic).pix_array[row][col]).B) == 255)
-            {
-              Pixel noChange = { (((*pic).pix_array[row][col]).R), (((*pic).pix_array[row][col]).G), (((*pic).pix_array[row][col]).B)};
-              (*pic).pix_array[row][col] = noChange;
-            }
-
-         }
-     }
 }
 
-void zebra (Picture * pic){ //Makes a picture of zebra stripes
+void zebra (Picture * pic){ //Makes a picture of zebra stripes on black parts of image
     printf("This is the Zebra Stripe function\n");
     int row, col;
     
@@ -229,11 +151,11 @@ void zebra (Picture * pic){ //Makes a picture of zebra stripes
     {
         for (col = 0; col < (*pic).width; col++)
         {
-            ((*pic).pix_array[row][col]).R = 255;
-
-            ((*pic).pix_array[row][col]).G = 255;
-
-            ((*pic).pix_array[row][col]).B = 255;
+            if (((*pic).pix_array[row][col]).R == 0 && ((*pic).pix_array[row][col]).G == 0 && ((*pic).pix_array[row][col]).B == 0){
+                ((*pic).pix_array[row][col]).R = 255;
+                ((*pic).pix_array[row][col]).G = 255;
+                ((*pic).pix_array[row][col]).B = 255;
+            }
         }
     }
     
@@ -241,18 +163,43 @@ void zebra (Picture * pic){ //Makes a picture of zebra stripes
     {
         for (col = 0; col < (*pic).width; col++)
         {
-            ((*pic).pix_array[row][col]).R = 0;
-
-            ((*pic).pix_array[row + 1][col + 1]).R = 0;
-            
-            ((*pic).pix_array[row][col]).G = 0;
-
-            ((*pic).pix_array[row + 1][col + 1]).G = 0;
-            
-            ((*pic).pix_array[row][col]).B = 0;
-
-            ((*pic).pix_array[row + 1][col + 1]).B = 0;
+            if (((*pic).pix_array[row][col]).R == 255 && ((*pic).pix_array[row][col]).G == 255 && ((*pic).pix_array[row][col]).B == 255){
+                ((*pic).pix_array[row][col]).R = 0;
+                ((*pic).pix_array[row + 1][col + 1]).R = 0;
+                
+                ((*pic).pix_array[row][col]).G = 0;
+                ((*pic).pix_array[row + 1][col + 1]).G = 0;
+                
+                ((*pic).pix_array[row][col]).B = 0;
+                ((*pic).pix_array[row + 1][col + 1]).B = 0;
+            }
         }
     }
 }
 
+void strip (Picture * pic, char color){
+    printf("This function strips an image of the specified color\n");
+    int row, col;
+    
+    for (row = 0; row < (*pic).height; row++)
+    {
+        for (col = 0; col < (*pic).width; col++)
+        {
+            if (color == 'R' || color == 'r'){ //Removes all red from the image
+                ((*pic).pix_array[row][col]).R = 0;
+            }
+            
+            else if (color == 'G' || color == 'g'){ //Removes all green from the image
+                ((*pic).pix_array[row][col]).G = 0;
+            }
+            
+            else if (color == 'B' || color == 'b'){ //Removes all blue from the image
+                ((*pic).pix_array[row][col]).B = 0;
+            }
+            
+            else {
+                printf("Error: must select red green or blue to strip from image");
+            }
+        }
+    }
+}
