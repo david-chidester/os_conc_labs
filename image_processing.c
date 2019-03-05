@@ -22,7 +22,7 @@
 
 //function prototypes
 
-Picture create_black_image (int height, int width);
+Picture create_black_image (int height, int width); //creates a black image
 void create_test_image (Picture * pic);
 void pictureRedder (Picture * pic);
 void pictureGreener (Picture * pic);
@@ -174,7 +174,7 @@ void zebra (Picture * pic){ //Makes a picture of zebra stripes on black parts of
         for (col = 0; col < (*pic).width; col++)
         {
             if (((*pic).pix_array[row][col]).R == 0 && ((*pic).pix_array[row][col]).G == 0 && ((*pic).pix_array[row][col]).B == 0){
-                ((*pic).pix_array[row][col]).R = 255;
+                ((*pic).pix_array[row][col]).R = 255; //white pixels are created
                 ((*pic).pix_array[row][col]).G = 255;
                 ((*pic).pix_array[row][col]).B = 255;
             }
@@ -182,12 +182,12 @@ void zebra (Picture * pic){ //Makes a picture of zebra stripes on black parts of
     }
     
     for (row = 0; row < (*pic).height; row += 4) //draws black striped on white pixels
-    {
+    { //white stripes are two pixels thick as are black
         for (col = 0; col < (*pic).width; col++) //iteration through columns will create horizontal stripes
         {
             if (((*pic).pix_array[row][col]).R == 255 && ((*pic).pix_array[row][col]).G == 255 && ((*pic).pix_array[row][col]).B == 255){
                 ((*pic).pix_array[row][col]).R = 0;
-                ((*pic).pix_array[row + 1][col + 1]).R = 0;
+                ((*pic).pix_array[row + 1][col + 1]).R = 0; //black pixels are created which are two pixels thick
                 
                 ((*pic).pix_array[row][col]).G = 0;
                 ((*pic).pix_array[row + 1][col + 1]).G = 0;
