@@ -314,7 +314,16 @@ void printLastRec (struct node * first) {
                    the list itself is unchanged
   note:  processing proceeds recursively
 */
-  printf ("Function printLastRec is not implemented at present\n\n");
+
+  struct node * listElt = first;
+  if (listElt->next != NULL) {
+    listElt = listElt->next;
+    //recurvively calls printLastRec until the next ponter is a null pointer
+    printLastRec(listElt); 
+  }
+  else {
+    printf("%s is the last name in the list\n\n", listElt->data);
+  }
 }
 
 void printReverse (struct node * first) {
