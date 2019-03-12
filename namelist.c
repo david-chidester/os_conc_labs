@@ -323,11 +323,14 @@ void printLastRec (struct node * first) {
 */	  
 
   struct node * listElt = first;
-
+	
+  if (listElt == NULL){
+    printf("\nERROR: empty list\n");
+    return;
+  }
   if (listElt->next != NULL) {
-    listElt = listElt->next;
     //recurvively calls printLastRec until the next ponter is a null pointer
-    printLastRec(listElt); 
+    printLastRec(listElt->next); 
   }
   else {
     printf("\n%s is the last name in the list\n\n", listElt->data);
