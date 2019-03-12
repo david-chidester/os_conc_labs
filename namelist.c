@@ -287,8 +287,15 @@ void printRec(struct node * first) {
                    the list itself is unchanged
   note:  processing proceeds recursively
 */
-
-  printf ("Function printRec is not implemented at present\n\n");
+  
+  struct node * listElt = first;
+  
+  if (listElt){
+    printf("%s\n",listElt->data);
+    listElt = listElt->next;
+    printRec (listElt);
+  }
+  
 }
 
 void printLast (struct node * first) {
