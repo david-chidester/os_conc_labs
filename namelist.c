@@ -287,6 +287,7 @@ void printRec(struct node * first) {
                    the list itself is unchanged
   note:  processing proceeds recursively
 */
+
   printf ("Function printRec is not implemented at present\n\n");
 }
 
@@ -298,11 +299,10 @@ void printLast (struct node * first) {
 */
 
 	  struct node * listElt = first;
-  printf ("The names on the list are:\n\n");
 
   while (listElt) {
   	if (listElt->next == NULL){
-  		printf ("%s is the last name in the list\n\n", listElt->data);
+  		printf ("\n%s is the last name in the list\n\n", listElt->data);
   	}
     listElt = listElt->next;
   }
@@ -313,16 +313,17 @@ void printLastRec (struct node * first) {
   post-condition:  the last item on the list is printed; 
                    the list itself is unchanged
   note:  processing proceeds recursively
-*/
+*/	  
 
   struct node * listElt = first;
+
   if (listElt->next != NULL) {
     listElt = listElt->next;
     //recurvively calls printLastRec until the next ponter is a null pointer
     printLastRec(listElt); 
   }
   else {
-    printf("%s is the last name in the list\n\n", listElt->data);
+    printf("\n%s is the last name in the list\n\n", listElt->data);
   }
 }
 
@@ -339,5 +340,44 @@ void putFirst (struct node ** firstPtr) {
   post-condition:  a name is read, located on the list,
                    and placed at the beginning of the list
 */
-  printf ("Function putFirst is not implemented at present\n\n");
-}
+    
+    //this function is slightly modified version of delete
+    char name [strMax];
+    struct node * listPtr;
+    struct node * prevPtr;
+    
+    if (*firstPtr) {
+        printf ("Enter name to moved to the head of the list: ");
+        scanf ("%s", name);
+        
+        if (strcmp (name, (*firstPtr)->data) == 0) {
+            /* checks if the selected name is already the first item */
+            printf ("%s is already the first item on list\n\n", name);
+        }
+        else {
+            /* item to move is not already at beginning of list */
+            /* start at beginning of list */
+            listPtr = (*firstPtr)->next;  /* the current node to search */
+            prevPtr = *firstPtr;          /* the node behind listPtr */
+            
+            while (listPtr && (strcmp (name, listPtr->data) != 0)) {
+                prevPtr = listPtr;
+                listPtr = prevPtr->next;
+            }
+            
+            if (listPtr) {
+                /* remove item from list */
+                prevPtr->next = listPtr->next;
+                listPtr->next = *firstPtr;
+                *firstPtr = listPtr;
+                printf ("%s moved to the beginning of the list\n\n", name);
+            }
+            else {
+                printf ("%s not found on list\n\n", name);
+            }
+        } /* end processing of name */
+    }
+    else {
+        printf ("Error: List is empty\n");
+    }
+  }
