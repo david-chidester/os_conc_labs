@@ -342,7 +342,14 @@ void printReverse (struct node * first) {
   post-condition:  The items on the list are printed from last to first
                    the list itself is unchanged
 */
-  printf ("Function printReverse is not implemented at present\n\n");
+	
+    if (first == NULL) 
+       return; 
+   
+    printReverse(first->next); 
+   
+    printf("%s \n", &first->data); 
+    }
 }
 
 void putFirst (struct node ** firstPtr) {
