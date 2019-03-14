@@ -343,13 +343,14 @@ void printReverse (struct node * first) {
                    the list itself is unchanged
 */
 	
-    if (first == NULL) 
+  struct node * listElt = first;
+
+    if (listElt == NULL) 
        return; 
    
-    printReverse(first->next); 
+    printReverse(listElt->next); 
    
-    printf("%s \n", &first->data); 
-    }
+    printf("%s \n", listElt->data); 
 }
 
 void putFirst (struct node ** firstPtr) {
