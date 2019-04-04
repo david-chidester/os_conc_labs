@@ -79,6 +79,19 @@ void putFirst (struct node ** firstPtr);
   note:  processing proceeds iteratively
 */
 
+void removeDuplicates (struct node * first);
+/* pre-condition:  first designates the first node of a list 
+  post-condition:  each name on the list appears only once (no duplicate names)
+                   when duplicates occur on the original list,
+                      only the first occurence remains after processing
+*/
+
+void duplicate (struct node * firstPtr);
+/* pre-condition:  first designates the first node of a list 
+  post-condition:  each node is duplicated, with the new node inserted
+                   after the original node
+*/
+
 int main (void) {
   /* program to coordinate the menu options and calls the requested function */
 
@@ -99,6 +112,8 @@ int main (void) {
     printf ("P - Print the names on the list (iteratively)\n");
     printf ("S - Print the names on the list (recursively)\n");
     printf ("R - Print the names in reverse order\n");
+    printf ("T - Remove duplicate names (leaving only the first occurence)\n");
+    printf ("G - Duplicate each node\n");
     printf ("Q - Quit\n");
 
     /* determine user selection */
@@ -142,6 +157,14 @@ int main (void) {
         case 'r': 
           printReverse(first);
           break;
+        case 'T':
+        case 't':
+          removeDuplicates(first);
+          break;
+        case 'G':
+        case 'g':
+          duplicate(first);
+          break;  
         case 'Q':
         case 'q':
           printf ("Program terminated\n");
@@ -398,4 +421,71 @@ void putFirst (struct node ** firstPtr) {
     else {
         printf ("Error: List is empty\n");
     }
+}
+
+void removeDuplicates (struct node * first) {
+/* pre-condition:  first designates the first node of a list 
+  post-condition:  each name on the list appears only once (no duplicate names)
+                   when duplicates occur on the original list,
+                      only the first occurence remains after processing
+*/
+    struct node * listPtr = first; //The current node in the search
+    struct node * comparePtr; //the node being compared to listPtr
+    struct node * prevPtr; //the node before comparePtr
+
+  //test if the list is null
+  if (listPtr == NULL){
+    printf("Error: can not unduplicate empty list\n");
+    return;
+    }
+
+    //non null list
+  else{
+    while (listPtr){
+      prevPtr = listPtr;
+      comparePtr = listPtr ->next;
+      while (comparePtr) {
+        if (strcmp(listPtr->data, comparePtr->data) == 0){
+          //remove node comparePtr is pointing to
+          printf("removing %s\n", comparePtr->data);
+          prevPtr->next = comparePtr->next;
+          free(comparePtr);
+          comparePtr = prevPtr->next;
+        }
+        else {
+          prevPtr = comparePtr;
+          comparePtr = comparePtr->next;
+        }
+      }
+    listPtr = listPtr->next;
   }
+}
+
+    printf("duplicates have been removed\n\n");
+}
+
+void duplicate (struct node * firstPtr)
+/* pre-condition:  first designates the first node of a list 
+  post-condition:  each node is duplicated, with the new node inserted
+                   after the original node
+*/
+{
+  struct node * listPtr = firstPtr;
+
+  //test if the list is null
+  if (listPtr == NULL){
+    printf("Error: can not duplicate empty list\n");
+    return;
+  }
+
+  //when the list isn't null
+  while (listPtr != NULL){
+    struct node * newNode = (struct node *)malloc(sizeof(struct node));
+    newNode->next = listPtr->next;
+    listPtr->next = newNode;
+    //copying string from one node to dupe
+    strcpy(newNode->data, listPtr->data);
+    listPtr = listPtr->next->next;
+  }
+  printf("list has been duplicatated\n\n");
+}
